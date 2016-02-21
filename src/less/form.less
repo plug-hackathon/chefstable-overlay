@@ -1,7 +1,11 @@
 #root > .form {
   background-color: hsl(0, 0%, 100%);
-  position: relative;
+  border-radius: 7px;
+  box-shadow: 0 12px 30px 0 hsla(0, 0%, 0%, 0.6);
+  left: calc(~"50% - 250px");
+  position: absolute;
   overflow-x: hidden;
+  top: 50px;
   width: 500px;
 
   > .steps {
@@ -11,6 +15,73 @@
 
     > .step {
       flex: 1;
+
+      > .header {
+        font-weight: 600;
+        padding: 25px;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      > .body {
+        align-items: center;
+        background-color: hsl(0, 0%, 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 25px;
+
+        select {
+          -webkit-appearance: none;
+          appearance: none;
+          background-color: transparent;
+          border: 1px hsla(0, 0%, 0%, 0.1) solid;
+          border-radius: 3px;
+          cursor: pointer;
+          display: block;
+          font-family: proxima-nova, helvetica, arial, sans-serif;
+          font-size: 15px;
+          font-weight: 400;
+          line-height: 50px;
+          text-align-last: center;
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  > .buttons {
+    display: flex;
+
+    > * {
+      color: hsl(0, 0%, 100%);
+      cursor: pointer;
+      font-weight: 600;
+      padding: 25px 0 25px 0;
+      text-align: center;
+      text-transform: uppercase;
+      width: 50%;
+    }
+
+    > .previous {
+      background-color: hsla(204, 70%, 53%, 0.5);
+    }
+
+    > .previous:hover {
+      background-color: hsla(204, 70%, 53%, 0.75);
+    }
+
+    > .previous-inactive {
+      background-color: hsla(204, 70%, 53%, 0.5);
+      cursor: auto;
+    }
+
+    > .next {
+      background-color: hsla(204, 70%, 53%, 0.75);
+    }
+
+    > .next:hover {
+      background-color: hsla(204, 70%, 53%, 1);
     }
   }
 }

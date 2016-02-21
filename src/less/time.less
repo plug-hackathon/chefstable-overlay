@@ -1,0 +1,100 @@
+#root > .form > .steps > .time > .body {
+  > .month {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 25px 0 25px;
+    width: 100%;
+
+    > .button {
+      cursor: pointer;
+      display: block;
+      line-height: 25px;
+      text-align: center;
+    }
+
+    > .name {
+      text-transform: uppercase;
+    }
+  }
+
+  > .weeks {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    > .week {
+      display: flex;
+      margin-top: 5px;
+      width: 100%;
+
+      > .day {
+        display: flex;
+        flex: 1;
+        justify-content: center;
+
+        > .inner {
+          border-radius: 25px;
+          cursor: pointer;
+          line-height: 50px;
+          text-align: center;
+          width: 50px;
+        }
+
+        > .inner:hover {
+          background-color: hsla(204, 70%, 53%, 0.75);
+          color: hsl(0, 0%, 100%);
+          font-weight: 600;
+        }
+      }
+
+      > .day.out-of-range > .inner {
+        cursor: auto;
+      }
+
+      > .day.out-of-range:hover > .inner {
+        background-color: transparent;
+      }
+
+      > .day.selected-date > .inner {
+        background-color: hsla(204, 70%, 53%, 0.5);
+        color: hsl(0, 0%, 100%);
+        font-weight: 600;
+      }
+
+      > .day.selected-date > .inner:hover {
+        background-color: hsla(204, 70%, 53%, 0.75);
+      }
+    }
+  }
+
+  > .time {
+    cursor: pointer;
+    height: 250px;
+    margin-top: 25px;
+    width: 250px;
+  }
+
+  > .selected {
+    display: flex;
+    width: 100%;
+
+    > * {
+      flex: 1;
+    }
+
+    > .label {
+      font-weight: 600;
+      padding-right: 5px;
+      text-transform: uppercase;
+      text-align: right;
+    }
+
+    > .value {
+      padding-left: 5px;
+    }
+  }
+
+  > .selected-date {
+    margin-top: 25px;
+  }
+}

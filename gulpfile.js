@@ -9,13 +9,14 @@ gulp.task("js", function () {
     .transform(babelify.configure({presets: ["es2015", "react"]}))
     .bundle()
     .pipe(source("core.js"))
-    .pipe(gulp.dest("out/js"));
+    .pipe(gulp.dest("public/js"));
 });
 
 gulp.task("css", function () {
-  gulp.src("./src/less/core.less")
+  gulp
+    .src("./src/less/core.less")
     .pipe(less())
-    .pipe(gulp.dest("./out/css"));
+    .pipe(gulp.dest("./public/css"));
 });
 
 gulp.task("default", function () {

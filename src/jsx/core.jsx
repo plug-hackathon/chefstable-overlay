@@ -1,14 +1,17 @@
+import atom from "./atom";
 import Form from "./form";
+import moment from "moment";
 import React from "react";
 import ReactDOM from "react-dom";
-import state from "./state";
-import Step from "./step";
+
+require("moment/locale/sv");
 
 class Root extends React.Component {
   constructor(props) {
     super(props);
-    state.addWatch("root", (key, ref, old, n) => {
-      this.forceUpdate();
+    this.state = {state: atom.deref()};
+    atom.addWatch("root", (key, ref, old, n) => {
+      this.setState({state: n});
     });
   }
 
@@ -16,12 +19,7 @@ class Root extends React.Component {
     return (
       <div id="root">
         <div className="overlay"/>
-        <Form>
-          <Step>step 1</Step>
-          <Step>step 2</Step>
-          <Step>step 3</Step>
-          <Step>step 4</Step>
-        </Form>
+        <Form state={this.state.state}/>
       </div>
     );
   }
@@ -32,4 +30,4 @@ ReactDOM.render(
   document.querySelector("#react")
 );
 
-state.swap((s) => s.set("width", 500));
+atom.swap((s) => s.set("width", 500));
