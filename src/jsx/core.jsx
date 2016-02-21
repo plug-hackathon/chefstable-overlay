@@ -1,4 +1,4 @@
-import atom from "./atom";
+import {atom} from "./atom";
 import Form from "./form";
 import moment from "moment";
 import React from "react";
@@ -30,8 +30,6 @@ ReactDOM.render(
   <Root/>,
   document.querySelector("#react")
 );
-
-atom.swap((s) => s.set("width", 500));
 
 addEventListener("message", function (message) {
   let data = JSON.parse(message.data);

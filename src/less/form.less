@@ -138,4 +138,49 @@
       background-color: hsla(204, 70%, 53%, 0.5);
     }
   }
+
+  > .booked {
+    align-items: center;
+    background-color: hsl(0, 0%, 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    left: 0;
+    padding: 0 25px 0 25px;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
+    > .header {
+      font-weight: 600;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    > .text {
+      margin-top: 25px;
+      text-align: center;
+    }
+
+    > .button {
+      background-color: hsla(204, 70%, 53%, 0.75);
+      border-radius: 3px;
+      color: hsl(0, 0%, 100%);
+      cursor: pointer;
+      display: inline-block;
+      font-weight: 600;
+      margin-top: 25px;
+      padding: 25px 0 25px 0;
+      text-align: center;
+      text-transform: uppercase;
+      transition-duration: 0.25s;
+      transition-property: background-color;
+      width: 50%;
+    }
+
+    > .button:hover {
+      background-color: hsla(204, 70%, 53%, 1);
+    }
+  }
 }

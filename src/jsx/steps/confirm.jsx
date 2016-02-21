@@ -1,4 +1,4 @@
-import atom from "../atom";
+import {atom} from "../atom";
 import React from "react";
 import Step from "../step";
 

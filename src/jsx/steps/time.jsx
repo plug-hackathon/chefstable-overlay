@@ -1,8 +1,9 @@
-import atom from "../atom";
+import {atom} from "../atom";
 import {isFinite} from "lodash";
 import moment from "moment";
 import React from "react";
 import Step from "../step";
+import {timeToText} from "../util";
 
 export default class Time extends Step {
   renderPie(r, start, end) {
@@ -10,11 +11,6 @@ export default class Time extends Step {
     this.timeContext.moveTo(r / 2, r / 2);
     this.timeContext.arc(r / 2, r / 2, r / 2, (Math.PI * 2 * start) - (Math.PI / 2), (Math.PI * 2 * end) - (Math.PI / 2));
     this.timeContext.fill();
-  }
-
-  timeToText(time) {
-    let minute = Math.round(time * 1440) % 1440;
-    return ("0" + Math.floor(minute / 60)).slice(-2) + ":" + ("0" + (minute % 60)).slice(-2);
   }
 
   renderTime() {
@@ -51,7 +47,7 @@ export default class Time extends Step {
       this.timeContext.fillStyle = "hsla(204, 70%, 53%, 0.5)";
       this.renderPie(r, start, end);
       this.timeContext.fillStyle = "hsl(0, 0%, 0%)";
-      middleText = this.timeToText(start) + " - " + this.timeToText(end);
+      middleText = timeToText(start) + " - " + timeToText(end);
     }
 
     this.timeContext.beginPath();
@@ -188,7 +184,7 @@ export default class Time extends Step {
           </div>
           <div className="selected">
             <div className="label">Vald tid</div>
-            <div className="value">{isFinite(selectedTime) ? (this.timeToText(selectedTime) + " - " + this.timeToText((selectedTime + (2 / 24)) % 1)) : "Ingen tid vald"}</div>
+            <div className="value">{isFinite(selectedTime) ? (timeToText(selectedTime) + " - " + timeToText((selectedTime + (2 / 24)) % 1)) : "Ingen tid vald"}</div>
           </div>
         </div>
       </div>
