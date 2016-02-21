@@ -1,12 +1,24 @@
 #root > .form {
   background-color: hsl(0, 0%, 100%);
-  border-radius: 7px;
+  border-radius: 5px;
   box-shadow: 0 12px 30px 0 hsla(0, 0%, 0%, 0.6);
   left: calc(~"50% - 250px");
   position: absolute;
   overflow-x: hidden;
   top: 50px;
   width: 500px;
+
+  > .close {
+    color: hsl(0, 0%, 75%);
+    cursor: pointer;
+    line-height: 25px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 0;
+    width: 25px;
+    z-index: 1;
+  }
 
   > .steps {
     display: flex;
@@ -46,6 +58,37 @@
           text-align-last: center;
           width: 100%;
         }
+
+        input, textarea {
+          border: 1px hsla(0, 0%, 0%, 0.1) solid;
+          border-radius: 3px;
+          display: block;
+          font-family: proxima-nova, helvetica, arial, sans-serif;
+          font-size: 15px;
+          font-weight: 400;
+          height: 50px;
+          line-height: 25px;
+          margin-top: 25px;
+          padding: 11px 12px 12px 12px;
+          width: 100%;
+        }
+
+        textarea {
+          height: 200px;
+        }
+
+        input:first-child, textarea:first-child {
+          margin-top: 0;
+        }
+
+        input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+          color: hsla(0, 0%, 0%, 0.5);
+        }
+
+        select:focus, input:focus, textarea:focus {
+          border-color: hsla(0, 0%, 0%, 0.3);
+          outline: none;
+        }
       }
     }
   }
@@ -60,6 +103,8 @@
       padding: 25px 0 25px 0;
       text-align: center;
       text-transform: uppercase;
+      transition-duration: 0.25s;
+      transition-property: background-color;
       width: 50%;
     }
 
@@ -73,7 +118,7 @@
 
     > .previous-inactive {
       background-color: hsla(204, 70%, 53%, 0.5);
-      cursor: auto;
+      cursor: default;
     }
 
     > .next {
@@ -82,6 +127,15 @@
 
     > .next:hover {
       background-color: hsla(204, 70%, 53%, 1);
+    }
+
+    > .next-inactive {
+      background-color: hsla(204, 70%, 53%, 0.5);
+      cursor: default;
+    }
+
+    > .next-inactive:hover {
+      background-color: hsla(204, 70%, 53%, 0.5);
     }
   }
 }

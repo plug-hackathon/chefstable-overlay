@@ -1,4 +1,5 @@
 import atom from "./atom";
+import {isFinite} from "lodash";
 import Confirm from "./steps/confirm";
 import Contact from "./steps/contact";
 import Party from "./steps/party";
@@ -14,6 +15,13 @@ let stepNames = [
 ];
 
 export default class Form extends React.Component {
+  close() {
+    atom.swap((s) => s.set("open", false));
+    setTimeout(() => {
+      parent.postMessage(JSON.stringify({open: false}), "http://localhost:7000");
+    }, 250);
+  }
+
   getStyle() {
     let s = this.props.state;
     return {
@@ -22,16 +30,31 @@ export default class Form extends React.Component {
     };
   }
 
+  isValidStep(s, step) {
+    if (step === 1 && !isFinite(s.get("selectedTime"))) {
+      return false;
+    }
+    if (step === 2 && ((s.get("name").length < 1) || (s.get("phone").length < 1))) {
+      return false;
+    }
+    return true;
+  }
+
   gotoPreviousStep() {
     atom.swap((s) => s.set("step", Math.max(s.get("step") - 1, 0)));
   }
 
   gotoNextStep() {
-    atom.swap((s) => s.set("step", Math.min(s.get("step") + 1, 3)));
-  }
-
-  submit() {
-    console.log("bokat");
+    let step = this.props.state.get("step");
+    if (!this.isValidStep(this.props.state, step)) {
+      return;
+    }
+    let nextStep = step + 1;
+    if (nextStep < 4) {
+      atom.swap((s) => s.set("step", nextStep));
+    } else {
+      console.log("bokat");
+    }
   }
 
   renderPreviousButton() {
@@ -44,23 +67,24 @@ export default class Form extends React.Component {
   }
 
   renderNextButton() {
-    let s = this.props.state;
-    if (s.get("step") !== 3) {
-      // return <div className="next" onClick={this.gotoNextStep.bind(this)}>{stepNames[s.get("step") + 1]}</div>;
-      return <div className="next" onClick={this.gotoNextStep.bind(this)}>Nästa steg</div>;
-    } else {
-      return <div className="next" onClick={this.submit.bind(this)}>Boka</div>;
+    let step = this.props.state.get("step");
+    let className = "next";
+    let name = step === 3 ? "Boka" : "Nästa steg";
+    if (!this.isValidStep(this.props.state, step)) {
+      className += " next-inactive";
     }
+    return <div className={className} onClick={this.gotoNextStep.bind(this)}>{name}</div>;
   }
 
   render() {
     return (
       <div className="form">
+        <div className="fa fa-times close" onClick={this.close.bind(this)}/>
         <div className="steps" style={this.getStyle()}>
-          <Party state={this.props.state}/>
+          <Party gotoNextStep={this.gotoNextStep.bind(this)} state={this.props.state}/>
           <Time state={this.props.state}/>
-          <Contact state={this.props.state}/>
-          <Confirm state={this.props.state}/>
+          <Contact gotoNextStep={this.gotoNextStep.bind(this)} state={this.props.state}/>
+          <Confirm gotoNextStep={this.gotoNextStep.bind(this)} state={this.props.state}/>
         </div>
         <div className="buttons">
           {this.renderPreviousButton()}

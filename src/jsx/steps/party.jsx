@@ -18,7 +18,7 @@ export default class Party extends Step {
       <div className="step">
         <div className="header">Hur många i sällskapet?</div>
         <div className="body">
-          <select onChange={this.change.bind(this)} value={this.props.state.get("party")}>{map(range(10), (n) => this.renderOption(n))}</select>
+          <select onChange={this.change.bind(this)} onKeyDown={this.shouldGotoNextStep.bind(this)} value={this.props.state.get("party")}>{map(range(10), (n) => this.renderOption(n))}</select>
         </div>
       </div>
     );

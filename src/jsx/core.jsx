@@ -16,8 +16,9 @@ class Root extends React.Component {
   }
 
   render() {
+    let className = this.state.state.get("open") ? "open" : "";
     return (
-      <div id="root">
+      <div className={className} id="root">
         <div className="overlay"/>
         <Form state={this.state.state}/>
       </div>
@@ -31,3 +32,8 @@ ReactDOM.render(
 );
 
 atom.swap((s) => s.set("width", 500));
+
+addEventListener("message", function (message) {
+  let data = JSON.parse(message.data);
+  atom.swap((s) => s.set("open", data.open));
+});

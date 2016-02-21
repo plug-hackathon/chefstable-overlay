@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8"></meta>
+    <link href="/main.css" rel="stylesheet"></link>
+    <script src="https://use.typekit.net/wvq4rxc.js"></script>
+    <script>try { Typekit.load({async: false}); } catch (e) {}</script>
+  </head>
+  <body>
+    <div class="background"></div>
+    <div class="header">Ross Roadkill</div>
+    <div class="book">Boka bord</div>
+    <script src="/chefstable.js"></script>
+    <script>
+      ChefsTable.setup();
+      document.querySelector(".book").addEventListener("click", function () {
+        ChefsTable.show();
+      });
+    </script>
+  </body>
+</html>
